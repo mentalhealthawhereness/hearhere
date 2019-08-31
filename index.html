@@ -51,6 +51,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.12/leaflet.draw.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script charset="utf-8" src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.67.0/dist/L.Control.Locate.min.js"></script> 		  
     <script src="https://rawgit.com/k4r573n/leaflet-control-osm-geocoder/master/Control.OSMGeocoder.js"></script> 
 
     <script>
@@ -96,7 +97,15 @@
 
                 var osmGeocoder = new L.Control.OSMGeocoder({position: 'topleft'}); //Adds Search toolbar; OSMGeocoder       
 	          map.addControl(osmGeocoder);
+	    
+                var lc = L.control.locate({  //Adds Locate Control; to locate the user's location on the map
+	                  position: 'topleft',
+	              icon: 'fa fa-hand-o-down'
+	          });     
+	        map.addControl(lc);    
+	    
 
+	    
 
 		//Fetches
 		var getData = "https://" + config.cartoUsername + ".carto.com/api/v2/sql?format=GeoJSON&q=" + sqlQuery;
