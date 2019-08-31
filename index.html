@@ -20,7 +20,7 @@
     <div id="wrapper">
       <div id="header">
         <h1>Hear; Here</h1>
-        <h2>Our stories matter. <p>Let our stories of challenges and triumphs on mental illness become instruments to raise mental health awareness and provide hope and encouragement to others who are struggling with their mental health. Sharing our stories could also help break down the stigma around mental health problems and educate people about mental health. Truthfully, there should be no shame in talking about mental health and our struggles. IT IS important to talk about it and let people know that no matter how young or old, how rich or poor, or WHEREver they are, they are not alone in their battles. <p>We also encourage those who have loved ones who have struggled/still struggling with depression, anxiety, or other mental health problems to share how they have supported these people that they care about during these times. <p>Just a reminder though, please be cautious in sharing your stories if they may be triggering to others. Put trigger warnings if necessary.</h2>	      
+        <h2></h2>	      
 	</div>
 	<div id="controls">
         <p>Click the pins to read stories, or share yours. <p><input type="button" onclick="startEdits()" value="Click to add your story."> <input type="button" onclick="stopEdits()" value="Stop Your Editing Session">
@@ -85,7 +85,7 @@
 	          var map = L.map('map', { center: config.mapcenter, zoom: 6});   // Creates the Leaflet map object
 		// Add Tile Layer basemap
 		// Find your own at https://leaflet-extras.github.io/leaflet-providers/preview/
-		var Mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/anditabinas/cjzzh6e7m0vla1cqbnwjgvais.html?fresh=true&title=true&access_token=pk.eyJ1IjoiYW5kaXRhYmluYXMiLCJhIjoiY2plejI3aHp3MDV3MjMzcW9ydXl2bHNmZiJ9.9h6j7BbkM-PUtK0zaZ1iUg#10.0/42.362400/-71.020000/0, {
+		var Mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/anditabinas/cjzzh6e7m0vla1cqbnwjgvais/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW5kaXRhYmluYXMiLCJhIjoiY2plejI3aHp3MDV3MjMzcW9ydXl2bHNmZiJ9.9h6j7BbkM-PUtK0zaZ1iUg', {
 			attribution: '&copy; <a href="mapbox://styles/anditabinas/cjzzh6e7m0vla1cqbnwjgvais">Mapbox<\/a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap<\/a> contributors',
 			subdomains: 'abcd',
 			maxZoom: 19
