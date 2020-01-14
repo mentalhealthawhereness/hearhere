@@ -180,8 +180,9 @@
             });
 
             function setData() {
-                var enteredNickname = "'" + nickname.value + "'",
-                    enteredNotes = "'" + notes.value + "'";
+      			var enteredNickname = "'" + JSON.stringify(nickname.value.replace("'", "''")) + "'"                          
+      			var enteredNotes = "'" + JSON.stringify(notes.value.replace("'", "''")) + "'";                      
+
                 drawnItems.eachLayer(function(layer) {
                     var drawing = "'" + JSON.stringify(layer.toGeoJSON().geometry) + "'", //Converts the drawing to a GeoJSON
                         sql = "SELECT " + config.cartoInsertFunction + "("; //Constructs the SQL Query from the entered parameters on the dialog/form
