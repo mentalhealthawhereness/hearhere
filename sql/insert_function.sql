@@ -4,7 +4,7 @@ DROP FUNCTION IF EXISTS insert_crowd_mapping_data(text,text,text);
 CREATE OR REPLACE FUNCTION insert_crowd_mapping_data (
     _geojson TEXT,
     _name TEXT,
-    _notes TEXT)    
+    _note TEXT)    
 --Has to return something in order to be used in a "SELECT" statement
 RETURNS integer
 AS $$
@@ -18,9 +18,9 @@ BEGIN
 	
 
 	--Executes the insert given the supplied geometry, description, and username, while protecting against SQL injection.
-    EXECUTE ' INSERT INTO '||quote_ident(_the_table)||' (the_geom, name, notes)
+    EXECUTE ' INSERT INTO '||quote_ident(_the_table)||' (the_geom, name, note)
             VALUES ($1, $2, $3)
-            ' USING _the_geom, _name, _notes;
+            ' USING _the_geom, _name, _note;
             
     RETURN 1;
 END;
