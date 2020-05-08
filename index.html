@@ -46,8 +46,8 @@
                     <ul style="list-style-type: none; padding-left: 0px">
                         <li><label for="nickname">Nickame</label></li>
                         <li><input id="nickname" name="nickname" placeholder="Your nickname" size="40" type="text" required></li> 
-                        <li><label for="notes">About you + Contact Details</label></li>
-                        <li><textarea cols="40" id="notes" name="notes" placeholder="Tell us a bit about yourself and why you're willing to listen to someone. Please also add how to get in touch with you. (Phone number, chat, etc.)" rows="5"></textarea></li>
+                        <li><label for="note">About you + Contact Details</label></li>
+                        <li><textarea cols="40" id="note" name="note" placeholder="Tell us a bit about yourself and why you're willing to listen to someone. Please also add how to get in touch with you. (Phone number, chat, etc.)" rows="5"></textarea></li>
                     </ul>
                     <input style="position:absolute; top:-1000px" tabindex="-1" type="submit">
                 </fieldset>
@@ -89,7 +89,7 @@
             };
 
             var cartoData = null; //These adds data from Carto using the SQL API, declares variables, and writes the SQL selection query
-            var sqlQuery = "SELECT the_geom, name, notes FROM " + config.cartoTablename;
+            var sqlQuery = "SELECT the_geom, name, note FROM " + config.cartoTablename;
             var map = L.map('map', {
                 center: config.mapcenter,
                 zoom: 5
@@ -119,7 +119,7 @@
                 $.getJSON(getData, function(data) {
                     cartoData = L.geoJson(data, {
                         onEachFeature: function(feature, layer) {
-                            layer.bindPopup('<b>Name: <\/b>' + feature.properties.name + '<br>' + '<b>Here: <\/b>' + feature.properties.notes + '');
+                            layer.bindPopup('<b>Name: <\/b>' + feature.properties.name + '<br>' + '<b>Here: <\/b>' + feature.properties.note + '');
                         }
                     }).addTo(map);
                 });
@@ -180,14 +180,14 @@
 
             function setData() {
       			var enteredNickname = "'" + JSON.stringify(nickname.value.replace("'", "''")) + "'"                          
-      			var enteredNotes = "'" + JSON.stringify(notes.value.replace("'", "''")) + "'";                      
+      			var enteredNote = "'" + JSON.stringify(note.value.replace("'", "''")) + "'";                      
 
                 drawnItems.eachLayer(function(layer) {
                     var drawing = "'" + JSON.stringify(layer.toGeoJSON().geometry) + "'", //Converts the drawing to a GeoJSON
                         sql = "SELECT " + config.cartoInsertFunction + "("; //Constructs the SQL Query from the entered parameters on the dialog/form
                     sql += drawing;
                     sql += "," + enteredNickname;
-                    sql += "," + enteredNotes;
+                    sql += "," + enteredNote;
                     sql += ");";
                     console.log(drawing);
 
@@ -208,7 +208,7 @@
                     });
                     var newData = layer.toGeoJSON();
                     newData.properties.name = nickname.value;
-                    newData.properties.notes = notes.value;
+                    newData.properties.note = note.value;
                     cartoData.addData(newData);
                 });
 
