@@ -48,6 +48,8 @@
                         <li><input id="nickname" name="nickname" placeholder="Your nickname" size="40" type="text" required></li> 
                         <li><label for="note">About you + Contact Details</label></li>
                         <li><textarea cols="40" id="note" name="note" placeholder="Tell us a bit about yourself and why you're willing to listen to someone. Please also add how to get in touch with you. (Phone number, chat, etc.)" rows="5"></textarea></li>
+                        <li><label for="hear">Hear</label></li>
+                        <li><input id="hear" name="hear" placeholder="How can someone reachout to you?" size="40" type="text" required></li>                         
                     </ul>
                     <input style="position:absolute; top:-1000px" tabindex="-1" type="submit">
                 </fieldset>
@@ -119,7 +121,7 @@
                 $.getJSON(getData, function(data) {
                     cartoData = L.geoJson(data, {
                         onEachFeature: function(feature, layer) {
-                            layer.bindPopup('<b>Name: <\/b>' + feature.properties.name + '<br>' + '<b>Here: <\/b>' + feature.properties.note + '');
+                            layer.bindPopup('<b>Name: <\/b>' + feature.properties.name + '<br>' + '<b>Here: <\/b>' + feature.properties.note + '<br>' + '<b>Hear: <\/b>' + feature.properties.hear + '');
                         }
                     }).addTo(map);
                 });
@@ -179,15 +181,17 @@
             });
 
             function setData() {
-      			var enteredNickname = "'" + JSON.stringify(nickname.value.replace("'", "''")) + "'"                          
-      			var enteredNote = "'" + JSON.stringify(note.value.replace("'", "''")) + "'";                      
+      			var enteredNickname = "'" + JSON.stringify(nickname.value.replace("'", "''")) + "'"
+      			var enteredNote = "'" + JSON.stringify(note.value.replace("'", "''")) + "'"                 
+      			var enteredHear = "'" + JSON.stringify(hear.value.replace("'", "''")) + "'";                      
 
                 drawnItems.eachLayer(function(layer) {
                     var drawing = "'" + JSON.stringify(layer.toGeoJSON().geometry) + "'", //Converts the drawing to a GeoJSON
                         sql = "SELECT " + config.cartoInsertFunction + "("; //Constructs the SQL Query from the entered parameters on the dialog/form
                     sql += drawing;
                     sql += "," + enteredNickname;
-                    sql += "," + enteredNote;
+                    sql += "," + enteredNote;                    
+                    sql += "," + enteredHear;
                     sql += ");";
                     console.log(drawing);
 
@@ -209,6 +213,7 @@
                     var newData = layer.toGeoJSON();
                     newData.properties.name = nickname.value;
                     newData.properties.note = note.value;
+                    newData.properties.note = hear.value;                    
                     cartoData.addData(newData);
                 });
 
